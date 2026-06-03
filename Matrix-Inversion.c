@@ -29,6 +29,12 @@ void printMatrix(int n, int arr[n][n])
 
 }
 
+//function to determine the cofactor matrix 
+void cofac(int n, int arr[n][n])
+{
+    
+}
+
 int main()
 {
     //initializing the matrix parameters
@@ -48,6 +54,12 @@ int main()
 
     //det(arr)
     printf("\nThe det(arr) = %d", det);
+
+    if(det != 0)
+    {
+        //determining the cofactor matrix
+        cofac(n, arr);
+    }
 
     
 
