@@ -1,7 +1,7 @@
 #include<stdio.h>
 
 //function to take input of the elements
-void inputMatrix(int n, int arr[n][n], int* det)
+void inputMatrix(int n, int arr[n][n])
 {
     printf("Enter the elements of the matrix: \n");
     for(int i=0; i<n; i++)
@@ -9,7 +9,6 @@ void inputMatrix(int n, int arr[n][n], int* det)
         for(int j=0; j<n; j++)
         {
             scanf("%d", &arr[i][j]);
-            *det += arr[i][j];
         }
     }
 }
@@ -32,7 +31,7 @@ void printMatrix(int n, int arr[n][n])
 //function to determine the cofactor matrix 
 void cofac(int n, int arr[n][n])
 {
-    
+
 }
 
 int main()
@@ -41,28 +40,18 @@ int main()
     int n;
     printf("Enter the dimension of the matrix: ");
     scanf("%d", &n);
-    int det = 0;
-
+   
     //the matrix
     int arr[n][n];
 
     //taking input of the elements
-    inputMatrix(n, arr, &det);
+    inputMatrix(n, arr);
 
     //showing the main matrix
     printMatrix(n, arr);
 
-    //det(arr)
-    printf("\nThe det(arr) = %d", det);
-
-    if(det != 0)
-    {
-        //determining the cofactor matrix
-        cofac(n, arr);
-    }
-
     
-
+    
     return 0;
 
     
