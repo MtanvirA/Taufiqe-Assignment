@@ -117,29 +117,29 @@ void cofactor(int n, int arr[n][n], int crr[n][n])
     }
 }
 
-//function for adjoint matrix
+// function for adjoint matrix
 void adjoint(int n, int crr[n][n], int drr[n][n])
 {
-    for(int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for(int j=0; j<n; j++)
+        for (int j = 0; j < n; j++)
         {
-            //flipping the row and column of the cofactor matrix for constructing the adjoint matrix
+            // flipping the row and column of the cofactor matrix for constructing the adjoint matrix
             drr[i][j] = crr[j][i];
         }
     }
 }
 
-//inverse matrix function
+// inverse matrix function
 void inverseM(int n, int drr[n][n], float irr[n][n], int det)
 {
-    for(int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for(int j=0; j<n; j++)
+        for (int j = 0; j < n; j++)
         {
             float num = drr[i][j];
-            //dividing each of the elements of the adjoint matrix by the determinant value to get the inverse matrix!
-            irr[i][j] = num/det;
+            // dividing each of the elements of the adjoint matrix by the determinant value to get the inverse matrix!
+            irr[i][j] = num / det;
         }
     }
 }
@@ -148,8 +148,15 @@ int main()
 {
     // initializing the matrix parameters
     int n;
-    printf("Enter the dimension of the matrix: ");
+    printf("Enter the dimension of the matrix(1,2,3,4......): ");
     scanf("%d", &n);
+
+    //error handling
+    if(n<=0)
+    {
+        printf("\nInvalid dimension!\n");
+        return 0;
+    }
 
     // the matrix
     int arr[n][n];
@@ -167,26 +174,50 @@ int main()
     printf("The determinant: %d", det);
     printf("\n");
 
-    // showing the cofactor matrix
-    int crr[n][n];
-    cofactor(n, arr, crr);
-    printf("\nThe cofactor matrix: ");
-    printMatrix(n, crr);
-    printf("\n");
+    //handling the cases
+    if (det !=0 && n > 1)
+    {
+        // showing the cofactor matrix
+        int crr[n][n];
+        cofactor(n, arr, crr);
+        printf("\nThe cofactor matrix: ");
+        printMatrix(n, crr);
+        printf("\n");
 
-    //showing the adjoint matrix
-    int drr[n][n];
-    adjoint(n, crr, drr);
-    printf("The adjoint matrix: ");
-    printMatrix(n, drr);
-    printf("\n");
+        // showing the adjoint matrix
+        int drr[n][n];
+        adjoint(n, crr, drr);
+        printf("The adjoint matrix: ");
+        printMatrix(n, drr);
+        printf("\n");
 
-    //finally showing the inverse matrix
-    float irr[n][n];
-    inverseM(n, drr, irr, det);
-    printf("The inverse matrix: ");
-    printIMatrix(n, irr);
-    printf("\n");
+        // finally showing the inverse matrix
+        float irr[n][n];
+        inverseM(n, drr, irr, det);
+        printf("The inverse matrix: ");
+        printIMatrix(n, irr);
+        printf("\n");
+    }
+    else if(det != 0 && n==1)
+    {
+        // showing the cofactor matrix
+        printf("\nThe cofactor matrix: ");
+        printf("%d", 1);
+        printf("\n");
 
+        // showing the adjoint matrix
+        printf("The adjoint matrix: ");
+        printf("%d", 1);
+        printf("\n");
+
+        // finally showing the inverse matrix
+        printf("The inverse matrix: ");
+        printf("%.2f", (float)1/arr[0][0]);
+        printf("\n");
+    }
+    else
+    {
+        printf("\nMatrix Inversion Not Possible!");
+    }
     return 0;
 }
