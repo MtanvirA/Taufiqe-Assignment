@@ -28,6 +28,28 @@ void printMatrix(int n, int arr[n][n])
 
 }
 
+//function to determine the mini matrix for determinants
+void mini(int n, int arr[n][n], int mrr[n][n], int row, int col)
+{
+    int r=0, c=0;
+
+    for(int i=0; i<n; i++)
+    {
+        if(i==row) continue;
+
+        c=0;
+        for(int j=0; j<n; j++)
+        {
+            if(j==col) continue;
+
+            mrr[r][c] = arr[i][j];
+            c++;
+        }
+        r++;
+    }
+
+}
+
 //function to determine the cofactor matrix 
 void cofac(int n, int arr[n][n])
 {
@@ -50,7 +72,6 @@ int main()
     //showing the main matrix
     printMatrix(n, arr);
 
-    
     
     return 0;
 
