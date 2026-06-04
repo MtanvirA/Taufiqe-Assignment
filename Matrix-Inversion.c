@@ -103,6 +103,18 @@ void cofactor(int n, int arr[n][n], int crr[n][n])
     }
 }
 
+//function for adjoint matrix
+void adjoint(int n, int crr[n][n], int drr[n][n])
+{
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n; j++)
+        {
+            drr[i][j] = crr[j][i];
+        }
+    }
+}
+
 int main()
 {
     // initializing the matrix parameters
@@ -133,7 +145,11 @@ int main()
     printMatrix(n, crr);
     printf("\n");
 
-    
-
+    //showing the adjoint matrix
+    int drr[n][n];
+    adjoint(n, crr, drr);
+    printf("The adjoint matrix: ");
+    printMatrix(n, drr);
+    printf("\n");
     return 0;
 }
