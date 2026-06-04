@@ -50,6 +50,36 @@ void mini(int n, int arr[n][n], int mrr[n][n], int row, int col)
 
 }
 
+//function to determine the determinant of a matrix
+int determinant(int n, int arr[n][n])
+{
+    //base cases
+    if(n==1) return arr[0][0];
+    if(n==2)
+    {
+        return (arr[0][0]*arr[1][1] - arr[1][0]*arr[0][1]);
+    }
+
+    //parameters
+    int det = 0; 
+    int sign = 1;
+    int mrr[n][n];
+
+    //only using the first row to get the determinant
+    for(int j=0; j<n; j++)
+    {
+        //mini matrix for each elements of the first row
+        mini(n, arr, mrr, 0, j);
+        //multiplying element with it's mini matrix
+        det += sign*arr[0][j]*determinant(n-1, mini);
+        //altering the sign
+        sign *= -1;
+    }
+
+    return det;
+
+}
+
 //function to determine the cofactor matrix 
 void cofac(int n, int arr[n][n])
 {
