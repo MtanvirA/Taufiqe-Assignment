@@ -27,6 +27,20 @@ void printMatrix(int n, int arr[n][n])
     }
 }
 
+// functions to show the inverse matrix
+void printIMatrix(int n, float arr[n][n])
+{
+    printf("\n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            printf("%.2f ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 // function to determine the mini matrix for determinants
 void mini(int n, int arr[n][n], int mrr[n - 1][n - 1], int row, int col)
 {
@@ -110,7 +124,22 @@ void adjoint(int n, int crr[n][n], int drr[n][n])
     {
         for(int j=0; j<n; j++)
         {
+            //flipping the row and column of the cofactor matrix for constructing the adjoint matrix
             drr[i][j] = crr[j][i];
+        }
+    }
+}
+
+//inverse matrix function
+void inverseM(int n, int drr[n][n], float irr[n][n], int det)
+{
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n; j++)
+        {
+            float num = drr[i][j];
+            //dividing each of the elements of the adjoint matrix by the determinant value to get the inverse matrix!
+            irr[i][j] = num/det;
         }
     }
 }
@@ -151,5 +180,13 @@ int main()
     printf("The adjoint matrix: ");
     printMatrix(n, drr);
     printf("\n");
+
+    //finally showing the inverse matrix
+    float irr[n][n];
+    inverseM(n, drr, irr, det);
+    printf("The inverse matrix: ");
+    printIMatrix(n, irr);
+    printf("\n");
+
     return 0;
 }
